@@ -45,7 +45,8 @@ Il progetto sara' suddiviso cosi':
 36. Ritorna alla capitale
 37. Si incontra l'ottavo Boss
 38. Avanzamento per il nono Boss
-39. Entrata nell'albero
-40. Boss Fight finale 1phase
-41. 2phase
-42. Fine Gioco
+39. Nono Boss
+40. Entrata nell'albero
+41. Boss Fight finale 1phase
+42. 2phase
+43. Fine Gioco
