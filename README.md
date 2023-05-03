@@ -4,6 +4,7 @@ Suddivisioni Compiti
 2. Me Capo reparto, creazione del codice finale, creazione dei dialoghi e creazione
    della analisi finale.
 3. Gibertini traduzione del codice e creazione della bozza di analisi.
+4. Andruccioli sistema di combattimento, gestione degli item, gestione inventario e gensione upgrade.
 
 Il progetto sara' suddiviso cosi':
 1. Loading screen
