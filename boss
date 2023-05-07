@@ -1,0 +1,138 @@
+import random, time
+import numpy as np
+import os
+from colored import fg, bg, attr
+
+filename = 'save.txt'
+
+def save_progress(Pdamage, player_life, difence, blood_lost, Boss):
+    with open(filename, "w") as f:
+        f.write(str(Pdamage) + "\n")
+        f.write(str(player_life) + "\n")
+        f.write(str(difence) + "\n")
+        f.write(str(blood_lost) + "\n")
+        f.write(str(Boss))
+
+def load_progress():
+    if not os.path.exists(filename):
+        return None
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+        if len(lines) == 5:
+            Pdamage = int(lines[0].rstrip())
+            player_life = int(lines[1].rstrip())
+            difence = int(lines[2].rstrip())
+            blood_lost = int(lines[3].rstrip())
+            Boss = int(lines[4].rstrip())
+            return Pdamage, player_life, difence, blood_lost, Boss
+        else:
+            print("Save file is corrupted or incomplete")
+            return None
+
+
+print("Welcome to Alpha Bossfight!")
+print("")
+
+player_name = input("What's your name? ")
+print("Hello, " + player_name + "!")
+print("")
+
+player_life = 1000
+difence = 20
+blood_lost = 1400
+
+if os.path.exists(filename):
+    choice = input("Do you want to start a new game or load a saved one? n/l : ")
+    if choice == "l":
+        Pdamage, player_life, difence, blood_lost, Boss = load_progress()
+        el = np.array([Pdamage, player_life, difence, blood_lost, Boss])
+        print("Game loaded.")
+    else:
+        os.remove(filename)
+else:
+    os.remove(filename)
+
+Pdamage = random.randint(200, 400)
+Boss = 4072
+
+halfHP = Boss / 2
+pl = player_life
+
+while pl > 0 and Boss > 0:
+    print("Your hp is: " + str(player_life))
+    print("The Boss hp is: " + str(Boss))
+    choice = input("Wanna attack,parry or save? a/p/s : ")
+    if choice == "a":
+        if Boss <= halfHP:
+            break
+        Boss = Boss - Pdamage
+        print("You deal " + str(Pdamage) + " damage to the Boss!")
+        crit = random.randint(0, 6)
+        if crit == 6:
+            player_crit = (Pdamage + 65 + blood_lost)
+            Boss = Boss - player_crit
+            print("You deal " + str(player_crit) + " damage to the Boss!")
+        bossA = random.randint(0, 1)
+        if bossA == 1:
+            Bdamage = random.randint(50, 200)
+            player_life = player_life - Bdamage
+            print("You take " + str(Bdamage) + " damage!")
+    elif choice == "p":
+        if Boss <= halfHP:
+            break
+        Bdamage = random.randint(50, 200)
+        player_life = player_life - (Bdamage - difence)
+        print("You take " + str(Bdamage) + " damage!")
+        playerA = random.randint(0, 1)
+        if playerA == 1:
+            Boss = Boss - Pdamage
+            print("You deal " + str(Pdamage) + " damage to the Boss!")
+    elif choice == "s":
+        save_progress(Pdamage, player_life, difence, blood_lost, Boss)
+#seconda fase        
+print(f'{fg(52)}Margit = Well, thou art of passing skill.{attr(0)}')
+time.sleep(2)
+print(f'{fg(52)}Margit = Warrior blood must truly run in thy veins, Tarnished.{attr(0)}')
+time.sleep(2)
+#il danno aumenta durante la seconda fase
+while player_life > 0 and Boss > 0:
+    print("Your hp is: " + str(player_life))
+    print("The Boss hp is: " + str(Boss))
+    choice = input("Wanna attack,parry or save? a/p/s : ")
+    if choice == "a":
+        Boss = Boss - Pdamage
+        print("You deal " + str(Pdamage) + " damage to the Boss!")
+        crit = random.randint(0,6)                                                            
+        if crit == 6:
+            blood_lost = 1400
+            player_crit=(Pdamage + 65 + blood_lost)
+            Boss = Boss - player_crit
+            print("You deal " + str(player_crit) + " damage to the Boss!")
+        bossA = random.randint(0,1)
+        if bossA == 1:
+            Bdamage = random.randint(100,250)
+            player_life = player_life - Bdamage
+            print("You take " + str(Bdamage) + " damage!")
+                                                        
+    elif choice == "p":
+        Bdamage = random.randint(100,250)                                                                
+        player_life = player_life - (Bdamage - difence)
+        print("Hai subito " + str(Bdamage) + " danni!")
+        playerA = random.randint(0,1)
+        if playerA == 1:                                                                
+            Boss = Boss - Pdamage
+            print("You deal " + str(Pdamage) + " damage to the Boss!") 
+    elif choice == "s":
+        save_progress(Pdamage, player_life, difence, blood_lost, Boss)
+                                                            
+    else:
+        print("Unknown command!")
+                                                        
+#indico cosa succede se si muore o se si vince
+                                                
+if player_life <= 0:
+    print("You lose, next time be more strong")   
+    
+    
+if Boss <= 0:
+    print("You won")
