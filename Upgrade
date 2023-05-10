@@ -1,0 +1,46 @@
+import numpy as np
+
+filename = 's.py'
+vet = []
+with open(filename) as file:
+    for line in file:
+        df = int(line.rstrip())
+        vet.append(df)
+el = np.array(vet)
+
+xp = 0   # Esperienza iniziale del giocatore
+lv = 1   # Livello iniziale del giocatore
+xp_per_level = 100  # Esperienza necessaria per passare al livello successivo
+xp_increase = 150   # A partire dal livello 5, l'esperienza necessaria aumenta di 150 ogni volta
+
+print(f"Forza: {el[0]}")
+print(f"Vita: {el[1]}")
+print(f"Difesa: {el[2]}")
+print(f"Sanguinamento: {el[3]}")
+
+while lv <= 10:   # Continua finché il giocatore non raggiunge il livello massimo (10)
+    c = input('Che cosa vuoi potenziare? (f,v,d,s) ')
+    if c == 'f':
+        el[0] += 20
+        print(f"Nuova forza: {el[0]}")
+    elif c == 'v':
+        el[1] += 400
+        print(f"Nuova vita: {el[1]}")
+    elif c == 'd':
+        el[2] += 15
+        print(f"Nuova difesa: {el[2]}")
+    elif c == 's':
+        el[3] += 435
+        print(f"Nuovo sanguinamento: {el[3]}")
+    else:
+        print("Input non valido, riprova.")
+        continue   # Torna all'inizio del ciclo senza decrementare l'esperienza    
+
+#xploot = random.randint(50,300) 
+# xp = xp + xploot  # Aggiorna l'esperienza del giocatore di 100 punti
+# if xp >= xp_per_level:
+#     lv += 1
+#     xp -= xp_per_level
+#     if lv >= 3:
+#         xp_per_level += xp_increase
+#     print(f"Complimenti, sei passato al livello {lv}!")
