@@ -55,7 +55,8 @@ def first_phase():
         else:
             print("Unknown command!")
     #seconda fase        
-def sec_phase():
+def sec_phase(player_life):
+    global Boss, Pdamage, defence
     #il danno aumenta durante la seconda fase
     while player_life > 0 and Boss > 0:
         print(f"Your health points are: {player_life}")
@@ -96,3 +97,9 @@ def sec_phase():
         
     if Boss <= 0:
         print("You won!")
+
+
+
+first_phase()
+#dialogo
+sec_phase(player_life)
