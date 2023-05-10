@@ -11,6 +11,18 @@ def stat():
             for i in range(1):
                 vet = np.append(vet, df)
         return vet
+def xp():
+    xp_increase = 150
+    xp_per_level = 100
+    xploot = random.randint(290,1900) 
+    xp = xp + xploot  # Aggiorna l'esperienza del giocatore di 100 punti
+    if xp >= xp_per_level:
+        lv += 1
+        xp -= xp_per_level
+        if lv >= 3:
+            xp_per_level += xp_increase
+        print(f"Complimenti, sei passato al livello {lv}!")
+
 def first_phase():
     global el,Pdamage,player_life,defence,blood_lost,Boss,halfHP,pl
     vet=stat()
@@ -97,7 +109,8 @@ def sec_phase(player_life):
         
     if Boss <= 0:
         print("You won!")
-
+        xp()
+        #dialogo finale
 
 
 first_phase()
