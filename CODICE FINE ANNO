@@ -1,3 +1,5 @@
+NON FINITO
+
 import time, random, climage
 from colored import fg, bg, attr
 import numpy as np
