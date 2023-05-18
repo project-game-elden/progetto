@@ -6,6 +6,8 @@ Suddivisioni Compiti
 3. Gibertini traduzione del codice e creazione della bozza di analisi.
 4. Andruccioli sistema di combattimento, gestione degli item, gestione inventario e gensione upgrade.
 
+pip install playsound 1.2.2
+
 Il progetto sara' suddiviso cosi':
 1. Loading screen
 2. Decisione di iniziare il gioco, andare nelle impostazioni e uscire dal gioco
