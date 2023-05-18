@@ -24,6 +24,7 @@ def load_progress():
             difence = int(lines[2].rstrip())
             blood_lost = int(lines[3].rstrip())
             Boss = int(lines[4].rstrip())
+            print(Boss)
             return Pdamage, player_life, difence, blood_lost, Boss
         else:
             print("Save file is corrupted or incomplete")
@@ -37,9 +38,12 @@ player_name = input("What's your name? ")
 print("Hello, " + player_name + "!")
 print("")
 
-player_life = 1000
+player_life = 1400
 difence = 20
 blood_lost = 1400
+Boss = 4072
+Pdamage = random.randint(200, 400)
+halfHP = Boss / 2
 
 if os.path.exists(filename):
     choice = input("Do you want to start a new game or load a saved one? n/l : ")
@@ -52,10 +56,6 @@ if os.path.exists(filename):
 else:
     os.remove(filename)
 
-Pdamage = random.randint(200, 400)
-Boss = 4072
-
-halfHP = Boss / 2
 pl = player_life
 
 while pl > 0 and Boss > 0:
@@ -75,8 +75,8 @@ while pl > 0 and Boss > 0:
         bossA = random.randint(0, 1)
         if bossA == 1:
             Bdamage = random.randint(50, 200)
-            player_life = player_life - Bdamage
-            print("You take " + str(Bdamage) + " damage!")
+            player_life -= Bdamage
+            print("You took " + str(Bdamage) + " damage!")
     elif choice == "p":
         if Boss <= halfHP:
             break
